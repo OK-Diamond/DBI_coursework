@@ -4,7 +4,7 @@ var _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 async function loadData() {
     const { data, error } = await _supabase
-            .from('posts')
+            .from('People')
             .select()
 
     if(!error) {

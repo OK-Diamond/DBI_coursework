@@ -26,9 +26,9 @@ async function loadData() {
 
         parent.insertAdjacentHTML('beforeend', contents)
     }
-    console.log('Hello World')
-    console.log(data)
-    console.log(error)
+    //console.log('Hello World')
+    //console.log(data)
+    //console.log(error)
     
 }
 loadData()

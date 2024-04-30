@@ -19,4 +19,6 @@ async function loadData() {
     }
     
 }
+console.log('Hello World')
+console.log(data)
 loadData()

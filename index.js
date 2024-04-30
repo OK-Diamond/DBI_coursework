@@ -14,21 +14,21 @@ function addToContents(data) {
 async function loadData() {
     const { data, error } = await _supabase
             .from("People")
-            .select("*")
+            .select()
 
     if(!error) {
         const parent = document.getElementById('holder')
 
-        let contents = ''
+        let contents = "ID - Name - DOB"
         data.forEach(function(item){
-            contents += `<div> ${item.PersonID}}</div>` 
+            contents += `<div> ${item.PersonID} - ${item.Name} - ${item.DOB}</div>` 
         })
 
         parent.insertAdjacentHTML('beforeend', contents)
     }
-    //console.log('Hello World')
-    //console.log(data)
-    //console.log(error)
+    console.log('Hello World')
+    console.log(data)
+    console.log(error)
     
 }
 loadData()

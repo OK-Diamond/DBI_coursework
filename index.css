@@ -73,7 +73,12 @@ body {
         height: 20%;
     }
 
-    ul > * {
-        text-align: center;
+    ul {
+        list-style-type: none;
+        padding: 0;
+        li {
+            display: inline;
+            text-align: center;
+        }
     }
 }

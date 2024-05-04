@@ -73,5 +73,7 @@ body {
         height: 20%;
     }
 
-
+    ul > * {
+        text-align: center;
+    }
 }

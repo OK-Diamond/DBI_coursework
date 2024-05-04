@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="index.css" rel="stylesheet" type="text/css" />
         <title>1004 Coursework</title>
-        <!-- <script src="https://unpkg.com/@supabase/supabase-js@2"></script> --->
+        <meta charset="UTF-8" />
+        <meta lang="en" />
+        <meta title="1004 Coursework" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="1004 Coursework" />
+        <meta name="keywords" content="1004, coursework" />
+        <meta name="author" content="Oliver Kirk" />
         
+        <link href="index.css" rel="stylesheet" type="text/css" />
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1"></script>
         <script src="./index.js"></script>
         
@@ -14,11 +20,11 @@
             <header class="box">
                 <h1>People Search</h1>
                 <nav>
-                    <p>
+                    <ul>
                         People Search
                         <a href="#">Vehicle Search</a>
                         <a href="#">Add a Vehicle</a>
-                    </p>
+                    </ul>
                 </nav>
             </header>
             <div class="center">
@@ -31,13 +37,15 @@
                     <p>Search by driver name</p>
                     <p>Search by driving license number</p>
                     <p>Submit</p>
+                    <p>
+                        Results
+                        <div id="holder"></div>
+                    </p>
                 </section>
             </div>
             <footer class="box">
                 <p>
                     Footer
-                    <div id="holder"></div>
-                    a1
                 </p>
             </footer>
         </div>

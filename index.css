@@ -11,12 +11,8 @@ body {
     margin: 0px 5px;
     background: white;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-content: stretch;
-
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 
     
     /* Text */
@@ -34,9 +30,8 @@ body {
     }
 
     header {
-        order: 1;
-        height: 20%;
-        flex: 1 1 100%;
+        grid-column: 1 / 5;
+        grid-row: 1;
         
         padding: 10px 5px;
         margin: 10px;
@@ -70,25 +65,28 @@ body {
     }
 
     aside {
-        order: 2;
-        height: 50%;
-        flex: 1 1 1%;
+        grid-column: 1 / 1;
+        grid-row: 2;
         
-        padding: 10px 5px;
+        padding: 0px;
         margin: 10px;
         border-color: black;
         border-style: solid;
         border-width: 1px;
 
         img {
-            width: 100%;
+            max-width: 90%;
+            max-height: 90%;
+            padding: 5%;
+            margin: 0px;
+            object-fit: contain;
         }
+        
     }
     
     section {
-        order: 3;
-        height: 50%;
-        flex: 4 1 4%;
+        grid-column: 2 / 5;
+        grid-row: 2;
 
         padding: 10px 5px;
         margin: 10px;
@@ -98,9 +96,8 @@ body {
     }
 
     footer {
-        order: 4;
-        height: 20%;
-        flex: 1 1 100%;
+        grid-column: 1 / 5;
+        grid-row: 3;
 
         padding: 10px 5px;
         margin: 10px;
@@ -113,12 +110,9 @@ body {
 /* Responsive */
 @media screen and (max-width: 1000px) {
     .page {
-        flex-direction: column;
-        flex-wrap: wrap;
         header {
-            order: 1;
-            width: 95%;
-            flex: 0 1 20%;
+            grid-column: 1 / 5;
+            grid-row: 1;
             nav {
                 ul {
                     flex-direction: column;
@@ -126,16 +120,22 @@ body {
             }
         }
         section {
+            grid-column: 1 / 5;
+            grid-row: 2;
             order: 2;
             width: 95%;
             flex: 0 1 20%;
         }
         aside {
+            grid-column: 1 / 1;
+            grid-row: 3;
             order: 3;
             width: 10%;
             flex: 0 1 10%;
         }
         footer {
+            grid-column: 2 / 4;
+            grid-row: 3;
             order: 4;
             width: 40%;
             flex: 0 1 10%;

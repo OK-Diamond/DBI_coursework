@@ -35,9 +35,9 @@
 
             <!-- Page content -->
             <section>
-                <p>Search by driver name</p>
-                <p>Search by driving license number</p>
-                <p>Submit</p>
+                <p>Search by driver name: <input type="text" id="p1"></p>
+                <p>Search by driving license number <input type="text" id="p2"></p>
+                <p><button onclick="submit(document.getElementById('p1').value, document.getElementById('p2').value)">Submit</button></p>
                 <p>
                     Results
                     <div id="holder"></div>

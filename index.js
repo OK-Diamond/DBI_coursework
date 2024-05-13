@@ -82,7 +82,7 @@ async function db_search_vs(rego) {
     if (e1 || e2) {
         message_content = `<p>Error: ${e1} ${e2}</p>`;
     } else if (rego == "") {
-        message_content = `<p>Error: Fields is empty</p>`;
+        message_content = `<p>Error: Field is empty</p>`;
     } else {
         if (d1.length == 0 && d2.length == 0) {
             message_content += "<p>No results found</p>";
@@ -118,46 +118,23 @@ async function db_search_vs(rego) {
     message_div.insertAdjacentHTML('beforeend', message_content);
 }
 
-async function db_add(rego = "", make = "", model = "", colour = "", owner = "", license = "") {
-    console.log("a rego:", rego, " make:", make, " model:", model, " colour:", colour, " owner:", owner);
+async function db_add_v(rego, make, model, colour, owner_id) {
+    console.log("a rego:", rego, " make:", make, " model:", model, " colour:", colour, " owner_id:", owner_id);
 
-    // Get max person id (in case a new person is added)
-    var {data, error} = await _supabase.from("People").select("PersonID(count)");
-    var max_person_id = data.length;
-
-    // Check if owner is stored
-    var {data, error} = await _supabase
-        .from("People")
-        .select("*")
-        .filter('Name', 'ilike', '*'+owner+'*');
-    if(!error) {
-        if (data.OwnerID == null || data.OwnerID.length == 0) {
-            console.log("Owner not found");
-            var {error} = await _supabase
-                .from("People")
-                .insert(
-                    {PersonID: max_person_id+1, Name: owner, LicenseNumber: license}
-                );
-            if(!error) {
-                console.log("Owner added");
-            } else {
-                console.log("Owner add failed: ", error);
-            }
-        } else {
-            console.log("Owner found:", data.Name);
-        }
-    }
+    var message_div = document.getElementById('message');
 
     // Add vehicle
     var {error} = await _supabase
         .from("Vehicles")
         .insert([
-            {VehicleID: rego, Make: make, Model: model, Colour: colour, OwnerID: owner}
+            {VehicleID: rego, Make: make, Model: model, Colour: colour, OwnerID: owner_id}
         ]);
     if(!error) {
         console.log("Vehicle added");
+        message_div.insertAdjacentHTML('beforeend', "Vehicle added successfully <br>");
     } else {
         console.log("Vehicle add failed: ", error);
+        message_div.insertAdjacentHTML('beforeend', "Vehicle add failed <br>");
     }
 }
 
@@ -174,23 +151,94 @@ function vs_submit() {
     );
 }
 
-function av_submit() {
-    db_add(
-        rego = document.getElementById('rego').value, 
-        model = document.getElementById('model').value, 
-        colour = document.getElementById('colour').value, 
-        name = document.getElementById('name').value, 
-        dob = document.getElementById('dob').value, 
-        address = document.getElementById('address').value, 
-        license_num = document.getElementById('license_num').value, 
-        license_exp = document.getElementById('license_exp').value, 
-    );
+async function av_submit_v(reset_message = true) {
+    console.log("av_submit_v");
+    // Reset message
+    var message_div = document.getElementById('message');
+    if (reset_message) {
+        message_div.innerHTML = "";
+    }
+
+    // Check if owner is stored
+    var {data, error} = await _supabase
+        .from("People")
+        .select("*")
+        .filter('Name', 'ilike', '*'+document.getElementById('owner').value+'*');
+    console.log(data);
+
+    if(!error) {
+        if (data == null || data.length == 0) { // Owner not found
+            message_div.insertAdjacentHTML('beforeend', "Owner not found. Please add owner first. <br>");
+            document.getElementById("p_input").style.display = "block";
+        } else {
+            db_add_v(
+                rego = document.getElementById('rego').value, 
+                make = document.getElementById('make').value, 
+                model = document.getElementById('model').value, 
+                colour = document.getElementById('colour').value, 
+                owner_id = data[0].PersonID
+            );
+        }
+    } else {
+        message_div.insertAdjacentHTML('beforeend', "Error: "+error+"<br>");
+        document.getElementById("p_input").style.display = "block";
+    }
 }
 
-console.log(window.location.pathname.split("/").pop());
+async function av_submit_p() {
+    console.log("av_submit_p");
+    // Reset message
+    var message_div = document.getElementById('message');
+    message_div.innerHTML = "";
 
-//document.querySelector("#submit").addEventListener("keyup", event => {
-//    if(event.key !== "Enter") return; // Use `.key` instead.
-//    document.querySelector("#submit").click(); // Things you want to do.
-//    event.preventDefault(); // No need to `return false;`.
-//});
+    // Generate person id
+    var p_id = document.getElementById('personid').value;
+    if (p_id == "") {
+        var {data, error} = await _supabase
+            .from("People")
+            .select("PersonID(count)");
+        p_id = 1+data.length;
+    }
+
+    // Add person
+    var {error} = await _supabase
+        .from("People")
+        .insert([
+            {PersonID: p_id, 
+            Name: document.getElementById('name').value, 
+            Address: document.getElementById('address').value, 
+            DOB: document.getElementById('dob').value, 
+            LicenseNumber: document.getElementById('license').value, 
+            ExpiryDate: document.getElementById('expire').value}
+        ]);
+    if(!error) {
+        message_div.insertAdjacentHTML('beforeend', "Person added successfully <br>");
+    } else {
+        message_div.insertAdjacentHTML('beforeend', "Person add failed: "+error+" <br>");
+    }
+
+    setTimeout(av_submit_v(reset_message = false), 1000); // Wait 1 second for person to be added
+     // Submit the vehicle again
+}
+
+
+page = console.log(window.location.pathname.split("/").pop());
+
+
+ // Submit on enter
+var input_list = [];
+ if (page == "people.html" || page == "vs.html") {
+    input_list = ["submit"];
+} else if (page == "av.html") {
+    input_list = ["submit_v", "submit_p"];
+}
+
+for (i = 0; i < input_list.length; i++) {
+    var input = document.getElementById(input_list[i]);
+    input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById(input_list[i]).click();
+        }
+    });
+}

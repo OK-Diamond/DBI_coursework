@@ -35,28 +35,29 @@
 
             <!-- Page content -->
             <section>
-                <div class="input">
-                    <p>Number Plate*: <input type="text" id="numplate" placeholder="Name"></p>
+                <div class="input" id="v_input">
+                    <p>Registration Number: <input type="text" id="rego" placeholder="Registration Number"></p>
                     <p>Make: <input type="text" id="make" placeholder="Make"></p>
                     <p>Model: <input type="text" id="model" placeholder="Model"></p>
                     <p>Colour: <input type="text" id="colour" placeholder="Colour"></p>
+                    <p>Owner: <input type="text" id="owner" placeholder="Owner"></p>
 
-                    <p><button onclick="av_submit_vehicle()">Add vehicle</button></p>
+                    <p><button id="submit_v" onclick="av_submit_v()">Add vehicle</button></p>
+                </div>
+                <div class="input" id="p_input" style="display: none;">
+                    <p>PersonID: <input type="text" id="personid" placeholder="PersonID"> (leave blank to auto-generate)</p>
+                    <p>Name: <input type="text" id="name" placeholder="Name"></p>
+                    <p>Address: <input type="text" id="address" placeholder="Address"></p>
+                    <p>Date of Birth: <input type="text" id="dob" placeholder="Date of Birth"></p>
+                    <p>License Number: <input type="text" id="license" placeholder="License Number"></p>
+                    <p>License Expiry Date: <input type="text" id="expire" placeholder="License Expiry Date"></p>
 
-                    <p>Owner Name*: <input type="text" id="name" placeholder="Owner Name"></p>
-                    <p>Owner DOB: <input type="text" id="dob" placeholder="Owner DOB"></p>
-                    <p>Owner Address: <input type="text" id="address" placeholder="Owner Address"></p>
-                    <p>Owner License Number: <input type="text" id="license_num" placeholder="Owner License Number"></p>
-                    <p>Owner License Expiry Date: <input type="text" id="license_exp" placeholder="Owner License Expiry Date"></p>
-
-                    <p><button onclick="av_submit_person()">Add owner</button></p>
+                    <p><button id="submit_p" onclick="av_submit_p()">Add owner</button></p>
                 </div>
                 <div class="message" id="message"></div>
-                <div class="results" id="results"></div> <!-- Stores results from db query -->
             </section>
 
             <footer>
-                <p>* indicates required field</p>
                 <p>By Oliver Kirk</p>
             </footer>
 

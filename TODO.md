@@ -1,8 +1,0 @@
-- VS
-    - Left join to make it still show entries where owner is null
-- AV
-    - Check whether person is in database, and get their PersonID if so
-    - Create Playwright tests
-- Other
-    - Test Lighthouse
-    - Test Playwright

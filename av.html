@@ -19,12 +19,12 @@
         <div class="page" id="container">
 
             <header>
-                <h1>People Search</h1>
+                <h1>Add a Vehicle</h1>
                 <nav>
                     <ul>
-                        <li>People Search</li>
+                        <li><a href="index.html">People Search</a></li>
                         <li><a href="vs.html">Vehicle Search</a></li>
-                        <li><a href="av.html">Add a Vehicle</a></li>
+                        <li>Add a Vehicle</li>
                     </ul>
                 </nav>
             </header>
@@ -36,18 +36,28 @@
             <!-- Page content -->
             <section>
                 <div class="input">
-                    <p>Search by driver name: <input type="text" id="name" placeholder="Name"></p>
-                    <p>Search by driving license number <input type="text" id="license" placeholder="License Number"></p>
-                    <p><button onclick="ps_submit()">Submit</button></p>
+                    <p>Number Plate*: <input type="text" id="numplate" placeholder="Name"></p>
+                    <p>Make: <input type="text" id="make" placeholder="Make"></p>
+                    <p>Model: <input type="text" id="model" placeholder="Model"></p>
+                    <p>Colour: <input type="text" id="colour" placeholder="Colour"></p>
+
+                    <p><button onclick="av_submit_vehicle()">Add vehicle</button></p>
+
+                    <p>Owner Name*: <input type="text" id="name" placeholder="Owner Name"></p>
+                    <p>Owner DOB: <input type="text" id="dob" placeholder="Owner DOB"></p>
+                    <p>Owner Address: <input type="text" id="address" placeholder="Owner Address"></p>
+                    <p>Owner License Number: <input type="text" id="license_num" placeholder="Owner License Number"></p>
+                    <p>Owner License Expiry Date: <input type="text" id="license_exp" placeholder="Owner License Expiry Date"></p>
+
+                    <p><button onclick="av_submit_person()">Add owner</button></p>
                 </div>
                 <div class="message" id="message"></div>
                 <div class="results" id="results"></div> <!-- Stores results from db query -->
             </section>
 
             <footer>
-                <p>
-                    By Oliver Kirk
-                </p>
+                <p>* indicates required field</p>
+                <p>By Oliver Kirk</p>
             </footer>
 
         </div>

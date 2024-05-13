@@ -19,11 +19,11 @@
         <div class="page" id="container">
 
             <header>
-                <h1>People Search</h1>
+                <h1>Vehicle Search</h1>
                 <nav>
                     <ul>
-                        <li>People Search</li>
-                        <li><a href="vs.html">Vehicle Search</a></li>
+                        <li><a href="index.html">People Search</a></li>
+                        <li>Vehicle Search</li>
                         <li><a href="av.html">Add a Vehicle</a></li>
                     </ul>
                 </nav>
@@ -36,9 +36,8 @@
             <!-- Page content -->
             <section>
                 <div class="input">
-                    <p>Search by driver name: <input type="text" id="name" placeholder="Name"></p>
-                    <p>Search by driving license number <input type="text" id="license" placeholder="License Number"></p>
-                    <p><button onclick="ps_submit()">Submit</button></p>
+                    <p>Search by Vehicle ID: <input type="text" id="rego" placeholder="Vehicle ID"></p>
+                    <p><button onclick="vs_submit()">Submit</button></p>
                 </div>
                 <div class="message" id="message"></div>
                 <div class="results" id="results"></div> <!-- Stores results from db query -->

@@ -1,5 +1,4 @@
 const SUPABASE_URL = 'https://iwjygprrmbkssvcpbdpz.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3anlncHJybWJrc3N2Y3BiZHB6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMyODI4NjAsImV4cCI6MjAyODg1ODg2MH0.xYNt7yBxi6os26Uzi-_pk_YPR4bC7A3VsIzt9njt5Jk';
 var _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 async function db_search_ps(name, license) {
@@ -27,12 +26,12 @@ async function db_search_ps(name, license) {
             message_content = `<p>Search successful</p>`;
             for (var item = 0; item < data.length; item++) {
                 result_content += `<div>
-                    personid: ${data[item].PersonID} <br>
-                    name: ${data[item].Name} <br>
-                    address: ${data[item].Address} <br>
-                    dob: ${data[item].DOB} <br>
-                    licensenumber: ${data[item].LicenseNumber} <br>
-                    expirydate: ${data[item].ExpiryDate} <br>
+                    <p>personid: ${data[item].PersonID} </p>
+                    <p>name: ${data[item].Name} </p>
+                    <p>address: ${data[item].Address} </p>
+                    <p>dob: ${data[item].DOB} </p>
+                    <p>licensenumber: ${data[item].LicenseNumber} </p>
+                    <p>expirydate: ${data[item].ExpiryDate} </p>
                 </div>`;
             }
         }
